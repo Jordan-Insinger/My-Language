@@ -1,0 +1,153 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="all test cases pass">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Finished plc List, return Statement, function expression, while statement">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Generator.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -56,19 +55,19 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/test/java/plc/project/GeneratorTests.java",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/test/java/plc/project/GeneratorTests.java&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+-}]]></component>
+-  <component name="RunManager">
++}</component>
++  <component name="RunManager" selected="Gradle.GeneratorTests.testSwitchStatement">
+     <configuration name="AnalyzerTests" type="GradleRunConfiguration" factoryName="Gradle">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -88,6 +87,52 @@
+         <option name="vmOptions" />
+       </ExternalSystemSettings>
+       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="GeneratorTests.testFunctionExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.GeneratorTests.testFunctionExpression&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="GeneratorTests.testSwitchStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.GeneratorTests.testSwitchStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+@@ -165,10 +210,14 @@
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
+       <item itemvalue="Gradle.AnalyzerTests" />
++      <item itemvalue="Gradle.GeneratorTests.testFunctionExpression" />
++      <item itemvalue="Gradle.GeneratorTests.testSwitchStatement" />
+       <item itemvalue="Gradle.InterpreterTests" />
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.GeneratorTests.testSwitchStatement" />
++        <item itemvalue="Gradle.GeneratorTests.testFunctionExpression" />
+         <item itemvalue="Gradle.InterpreterTests" />
+       </list>
+     </recent_temporary>
+@@ -520,7 +569,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1669179000452</updated>
+     </task>
+-    <option name="localTasksCounter" value="40" />
++    <task id="LOCAL-00040" summary="Finished plc List, return Statement, function expression, while statement">
++      <created>1670099051320</created>
++      <option name="number" value="00040" />
++      <option name="presentableId" value="LOCAL-00040" />
++      <option name="project" value="LOCAL" />
++      <updated>1670099051320</updated>
++    </task>
++    <option name="localTasksCounter" value="41" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -538,7 +594,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="fixed missing semi" />
+     <MESSAGE value="fixed missing value and operand" />
+     <MESSAGE value="added parserTests file" />
+     <MESSAGE value="statement and block added" />
+@@ -563,6 +618,7 @@
+     <MESSAGE value="switch and case finished" />
+     <MESSAGE value="switch fixed" />
+     <MESSAGE value="all test cases pass" />
+-    <option name="LAST_COMMIT_MESSAGE" value="all test cases pass" />
++    <MESSAGE value="Finished plc List, return Statement, function expression, while statement" />
++    <option name="LAST_COMMIT_MESSAGE" value="Finished plc List, return Statement, function expression, while statement" />
+   </component>
+ </project>
+\ No newline at end of file

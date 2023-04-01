@@ -1,0 +1,143 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="some binary tests work, parsed add and multi expression">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="ParseException for groupExpression missing closing parenthesis">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Parser.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/plc/project/ParserExpressionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plc/project/ParserExpressionTests.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -61,8 +61,8 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Gradle.ParserExpressionTests">
+-    <configuration name="LexerTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++  <component name="RunManager" selected="Gradle.ParserExpressionTests.testExpressionStatement">
++    <configuration name="ParserExpressionTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -75,7 +75,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.LexerTests&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -85,7 +85,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="LexerTests.testExamples" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -98,7 +98,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.LexerTests.testExamples&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testBinaryExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -108,7 +108,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserExpressionTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testExpressionStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -121,7 +121,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserExpressionTests&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testExpressionStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -131,7 +131,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserExpressionTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testFunctionExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -144,7 +144,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserExpressionTests.testBinaryExpression&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testFunctionExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -179,11 +179,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.ParserExpressionTests.testExpressionStatement" />
++        <item itemvalue="Gradle.ParserExpressionTests.testFunctionExpression" />
+         <item itemvalue="Gradle.ParserExpressionTests" />
+         <item itemvalue="Gradle.ParserExpressionTests.testLiteralExpression" />
+         <item itemvalue="Gradle.ParserExpressionTests.testBinaryExpression" />
+-        <item itemvalue="Gradle.LexerTests" />
+-        <item itemvalue="Gradle.LexerTests.testExamples" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -214,6 +214,8 @@
+       <workItem from="1665022548609" duration="1089000" />
+       <workItem from="1665083673495" duration="947000" />
+       <workItem from="1665258807349" duration="4590000" />
++      <workItem from="1665416902433" duration="1704000" />
++      <workItem from="1665513251729" duration="4596000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -278,7 +280,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1665023038369</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="ParseException for groupExpression missing closing parenthesis">
++      <created>1665353756723</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1665353756723</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -306,6 +315,7 @@
+     <MESSAGE value="possible fix to weird quotes test case" />
+     <MESSAGE value="fixed weird quotes" />
+     <MESSAGE value="some binary tests work, parsed add and multi expression" />
+-    <option name="LAST_COMMIT_MESSAGE" value="some binary tests work, parsed add and multi expression" />
++    <MESSAGE value="ParseException for groupExpression missing closing parenthesis" />
++    <option name="LAST_COMMIT_MESSAGE" value="ParseException for groupExpression missing closing parenthesis" />
+   </component>
+ </project>
+\ No newline at end of file

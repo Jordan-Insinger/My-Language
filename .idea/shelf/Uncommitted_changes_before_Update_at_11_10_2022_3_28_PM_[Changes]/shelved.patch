@@ -1,0 +1,46 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="switch, case, statement assignment">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Fixed declaration statements, passes all test cases">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -68,7 +67,7 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Gradle.InterpreterTests">
++  <component name="RunManager" selected="Gradle.InterpreterTests.testListAccessExpression">
+     <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -241,8 +240,8 @@
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Gradle.InterpreterTests" />
+         <item itemvalue="Gradle.InterpreterTests.testListAccessExpression" />
++        <item itemvalue="Gradle.InterpreterTests" />
+         <item itemvalue="Gradle.InterpreterTests.testListAssignmentStatement" />
+         <item itemvalue="Gradle.InterpreterTests.testAccessExpression" />
+         <item itemvalue="Gradle.InterpreterTests.testBinaryExpression" />
+@@ -308,6 +307,7 @@
+       <workItem from="1667415076140" duration="6158000" />
+       <workItem from="1667437023736" duration="2165000" />
+       <workItem from="1667596434734" duration="1666000" />
++      <workItem from="1667923752430" duration="617000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>

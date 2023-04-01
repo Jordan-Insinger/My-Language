@@ -1,0 +1,246 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="access expression passing test case">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Added Ast.Statement.Assignment and finished binary expressions">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" afterDir="false" />
+     </list>
+@@ -56,19 +56,19 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/main/java/plc/project/Scope.java",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/main/java/plc/project/Scope.java&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+-}]]></component>
+-  <component name="RunManager" selected="Gradle.InterpreterTests">
++}</component>
++  <component name="RunManager" selected="Gradle.InterpreterTests.testIfStatement">
+     <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -92,7 +92,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="LexerTests" type="GradleRunConfiguration" factoryName="Gradle">
++    <configuration name="InterpreterTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -105,7 +105,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.LexerTests&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testBinaryExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -115,7 +115,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserTests" type="GradleRunConfiguration" factoryName="Gradle">
++    <configuration name="InterpreterTests.testGroupExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -128,17 +128,17 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserTests&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testGroupExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+       </ExternalSystemSettings>
+-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserTests.testFunctionExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testIfStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -151,7 +151,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserTests.testFunctionExpression&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testIfStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -161,7 +161,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserTests.testIfStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testVariableAssignmentStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -174,7 +174,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserTests.testIfStatement&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testVariableAssignmentStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -184,7 +184,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserTests.testSwitchStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="LexerTests" type="GradleRunConfiguration" factoryName="Gradle">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -197,7 +197,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserTests.testSwitchStatement&quot;" />
++            <option value="&quot;plc.project.LexerTests&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -207,7 +207,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserTests.testWhileStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserTests" type="GradleRunConfiguration" factoryName="Gradle">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -220,12 +220,12 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserTests.testWhileStatement&quot;" />
++            <option value="&quot;plc.project.ParserTests&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+       </ExternalSystemSettings>
+-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+@@ -233,19 +233,19 @@
+     <list>
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
++      <item itemvalue="Gradle.InterpreterTests.testGroupExpression" />
++      <item itemvalue="Gradle.InterpreterTests.testIfStatement" />
++      <item itemvalue="Gradle.InterpreterTests.testVariableAssignmentStatement" />
++      <item itemvalue="Gradle.InterpreterTests.testBinaryExpression" />
+       <item itemvalue="Gradle.InterpreterTests" />
+-      <item itemvalue="Gradle.ParserTests.testWhileStatement" />
+-      <item itemvalue="Gradle.ParserTests.testFunctionExpression" />
+-      <item itemvalue="Gradle.ParserTests.testSwitchStatement" />
+-      <item itemvalue="Gradle.ParserTests.testIfStatement" />
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.InterpreterTests.testIfStatement" />
++        <item itemvalue="Gradle.InterpreterTests.testVariableAssignmentStatement" />
++        <item itemvalue="Gradle.InterpreterTests.testGroupExpression" />
++        <item itemvalue="Gradle.InterpreterTests.testBinaryExpression" />
+         <item itemvalue="Gradle.InterpreterTests" />
+-        <item itemvalue="Gradle.ParserTests.testIfStatement" />
+-        <item itemvalue="Gradle.ParserTests.testWhileStatement" />
+-        <item itemvalue="Gradle.ParserTests.testSwitchStatement" />
+-        <item itemvalue="Gradle.ParserTests.testFunctionExpression" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -298,6 +298,8 @@
+       <workItem from="1666744396873" duration="2411000" />
+       <workItem from="1666810456926" duration="4549000" />
+       <workItem from="1666827158147" duration="2294000" />
++      <workItem from="1666959451130" duration="1823000" />
++      <workItem from="1666965154429" duration="10030000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -467,7 +469,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1666814415719</updated>
+     </task>
+-    <option name="localTasksCounter" value="25" />
++    <task id="LOCAL-00025" summary="Almost fully implemented Binary Expression, missing &amp;&amp; and ||">
++      <created>1666890760840</created>
++      <option name="number" value="00025" />
++      <option name="presentableId" value="LOCAL-00025" />
++      <option name="project" value="LOCAL" />
++      <updated>1666890760840</updated>
++    </task>
++    <task id="LOCAL-00026" summary="Added Ast.Statement.Assignment and finished binary expressions">
++      <created>1667013761726</created>
++      <option name="number" value="00026" />
++      <option name="presentableId" value="LOCAL-00026" />
++      <option name="project" value="LOCAL" />
++      <updated>1667013761730</updated>
++    </task>
++    <option name="localTasksCounter" value="27" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -485,8 +501,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Added the peek/match methods" />
+-    <MESSAGE value="Added Params:5.8.2 to testImplementation dependencies" />
+     <MESSAGE value="Added LexIdentifier()" />
+     <MESSAGE value="added lexString, lexEscape, lexOperator" />
+     <MESSAGE value="fixed lexString, lexEscape" />
+@@ -510,6 +524,8 @@
+     <MESSAGE value="fixed switch statement and added test case accordingly" />
+     <MESSAGE value="added fixes to array out of bounds exceptions" />
+     <MESSAGE value="access expression passing test case" />
+-    <option name="LAST_COMMIT_MESSAGE" value="access expression passing test case" />
++    <MESSAGE value="Almost fully implemented Binary Expression, missing &amp;&amp; and ||" />
++    <MESSAGE value="Added Ast.Statement.Assignment and finished binary expressions" />
++    <option name="LAST_COMMIT_MESSAGE" value="Added Ast.Statement.Assignment and finished binary expressions" />
+   </component>
+ </project>
+\ No newline at end of file

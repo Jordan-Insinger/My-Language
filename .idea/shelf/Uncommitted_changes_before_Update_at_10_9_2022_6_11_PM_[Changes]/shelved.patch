@@ -1,0 +1,206 @@
+Index: src/test/java/plc/project/ParserExpressionTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package plc.project;\r\n\r\nimport org.junit.jupiter.api.Assertions;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.params.ParameterizedTest;\r\nimport org.junit.jupiter.params.provider.Arguments;\r\nimport org.junit.jupiter.params.provider.MethodSource;\r\n\r\nimport java.math.BigDecimal;\r\nimport java.math.BigInteger;\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\nimport java.util.Optional;\r\nimport java.util.function.Function;\r\nimport java.util.stream.Stream;\r\n\r\n/**\r\n * Standard JUnit5 parameterized tests. See the RegexTests file from Homework 1\r\n * or the LexerTests file from the last project part for more information.\r\n */\r\nfinal class ParserExpressionTests {\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testExpressionStatement(String test, List<Token> tokens, Ast.Statement.Expression expected) {\r\n        test(tokens, expected, Parser::parseStatement);\r\n    }\r\n\r\n    private static Stream<Arguments> testExpressionStatement() {\r\n        return Stream.of(\r\n                Arguments.of(\"Function Expression\",\r\n                        Arrays.asList(\r\n                                //name();\r\n                                new Token(Token.Type.IDENTIFIER, \"name\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"(\", 4),\r\n                                new Token(Token.Type.OPERATOR, \")\", 5),\r\n                                new Token(Token.Type.OPERATOR, \";\", 6)\r\n                        ),\r\n                        new Ast.Statement.Expression(new Ast.Expression.Function(\"name\", Arrays.asList()))\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testAssignmentStatement(String test, List<Token> tokens, Ast.Statement.Assignment expected) {\r\n        test(tokens, expected, Parser::parseStatement);\r\n    }\r\n\r\n    private static Stream<Arguments> testAssignmentStatement() {\r\n        return Stream.of(\r\n                Arguments.of(\"Assignment\",\r\n                        Arrays.asList(\r\n                                //name = value;\r\n                                new Token(Token.Type.IDENTIFIER, \"name\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"=\", 5),\r\n                                new Token(Token.Type.IDENTIFIER, \"value\", 7),\r\n                                new Token(Token.Type.OPERATOR, \";\", 12)\r\n                        ),\r\n                        new Ast.Statement.Assignment(\r\n                                new Ast.Expression.Access(Optional.empty(), \"name\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"value\")\r\n                        )\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testLiteralExpression(String test, List<Token> tokens, Ast.Expression.Literal expected) {\r\n        test(tokens, expected, Parser::parseExpression);\r\n    }\r\n\r\n    private static Stream<Arguments> testLiteralExpression() {\r\n        return Stream.of(\r\n                Arguments.of(\"Boolean Literal\",\r\n                        Arrays.asList(new Token(Token.Type.IDENTIFIER, \"TRUE\", 0)),\r\n                        new Ast.Expression.Literal(Boolean.TRUE)\r\n                ),\r\n                Arguments.of(\"Integer Literal\",\r\n                        Arrays.asList(new Token(Token.Type.INTEGER, \"1\", 0)),\r\n                        new Ast.Expression.Literal(new BigInteger(\"1\"))\r\n                ),\r\n                Arguments.of(\"Decimal Literal\",\r\n                        Arrays.asList(new Token(Token.Type.DECIMAL, \"2.0\", 0)),\r\n                        new Ast.Expression.Literal(new BigDecimal(\"2.0\"))\r\n                ),\r\n                Arguments.of(\"Character Literal\",\r\n                        Arrays.asList(new Token(Token.Type.CHARACTER, \"'c'\", 0)),\r\n                        new Ast.Expression.Literal('c')\r\n                ),\r\n                Arguments.of(\"String Literal\",\r\n                        Arrays.asList(new Token(Token.Type.STRING, \"\\\"string\\\"\", 0)),\r\n                        new Ast.Expression.Literal(\"string\")\r\n                ),\r\n                Arguments.of(\"Escape Character\",\r\n                        Arrays.asList(new Token(Token.Type.STRING, \"\\\"Hello,\\\\nWorld!\\\"\", 0)),\r\n                        new Ast.Expression.Literal(\"Hello,\\nWorld!\")\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testGroupExpression(String test, List<Token> tokens, Ast.Expression.Group expected) {\r\n        test(tokens, expected, Parser::parseExpression);\r\n    }\r\n\r\n    private static Stream<Arguments> testGroupExpression() {\r\n        return Stream.of(\r\n                Arguments.of(\"Grouped Variable\",\r\n                        Arrays.asList(\r\n                                //(expr)\r\n                                new Token(Token.Type.OPERATOR, \"(\", 0),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr\", 1),\r\n                                new Token(Token.Type.OPERATOR, \")\", 5)\r\n                        ),\r\n                        new Ast.Expression.Group(new Ast.Expression.Access(Optional.empty(), \"expr\"))\r\n                ),\r\n                Arguments.of(\"Grouped Binary\",\r\n                        Arrays.asList(\r\n                                //(expr1 + expr2)\r\n                                new Token(Token.Type.OPERATOR, \"(\", 0),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 1),\r\n                                new Token(Token.Type.OPERATOR, \"+\", 7),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 9),\r\n                                new Token(Token.Type.OPERATOR, \")\", 14)\r\n                        ),\r\n                        new Ast.Expression.Group(new Ast.Expression.Binary(\"+\",\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\")\r\n                        ))\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testBinaryExpression(String test, List<Token> tokens, Ast.Expression.Binary expected) {\r\n        test(tokens, expected, Parser::parseExpression);\r\n    }\r\n\r\n    private static Stream<Arguments> testBinaryExpression() {\r\n        return Stream.of(\r\n                Arguments.of(\"Binary And\",\r\n                        Arrays.asList(\r\n                                //expr1 && expr2\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"&&\", 6),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 10)\r\n                        ),\r\n                        new Ast.Expression.Binary(\"&&\",\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\")\r\n                        )\r\n                ),\r\n                Arguments.of(\"Binary Equality\",\r\n                        Arrays.asList(\r\n                                //expr1 == expr2\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"==\", 6),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 9)\r\n                        ),\r\n                        new Ast.Expression.Binary(\"==\",\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\")\r\n                        )\r\n                ),\r\n                Arguments.of(\"Binary Addition\",\r\n                        Arrays.asList(\r\n                                //expr1 + expr2\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"+\", 6),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 8)\r\n                        ),\r\n                        new Ast.Expression.Binary(\"+\",\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\")\r\n                        )\r\n                ),\r\n                Arguments.of(\"Binary Multiplication\",\r\n                        Arrays.asList(\r\n                                //expr1 * expr2\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"*\", 6),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 8)\r\n                        ),\r\n                        new Ast.Expression.Binary(\"*\",\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\")\r\n                        )\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testAccessExpression(String test, List<Token> tokens, Ast.Expression.Access expected) {\r\n        test(tokens, expected, Parser::parseExpression);\r\n    }\r\n\r\n    private static Stream<Arguments> testAccessExpression() {\r\n        return Stream.of(\r\n                Arguments.of(\"Variable\",\r\n                        Arrays.asList(new Token(Token.Type.IDENTIFIER, \"name\", 0)),\r\n                        new Ast.Expression.Access(Optional.empty(), \"name\")\r\n                ),\r\n                Arguments.of(\"List Index Access\",\r\n                        Arrays.asList(\r\n                                //list[expr]\r\n                                new Token(Token.Type.IDENTIFIER, \"list\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"[\", 4),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr\", 5),\r\n                                new Token(Token.Type.OPERATOR, \"]\", 9)\r\n                        ),\r\n                        new Ast.Expression.Access(Optional.of(new Ast.Expression.Access(Optional.empty(), \"expr\")), \"list\")\r\n                )\r\n        );\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @MethodSource\r\n    void testFunctionExpression(String test, List<Token> tokens, Ast.Expression.Function expected) {\r\n        test(tokens, expected, Parser::parseExpression);\r\n    }\r\n\r\n    private static Stream<Arguments> testFunctionExpression() {\r\n        return Stream.of(\r\n                Arguments.of(\"Zero Arguments\",\r\n                        Arrays.asList(\r\n                                //name()\r\n                                new Token(Token.Type.IDENTIFIER, \"name\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"(\", 4),\r\n                                new Token(Token.Type.OPERATOR, \")\", 5)\r\n                        ),\r\n                        new Ast.Expression.Function(\"name\", Arrays.asList())\r\n                ),\r\n                Arguments.of(\"Multiple Arguments\",\r\n                        Arrays.asList(\r\n                                //name(expr1, expr2, expr3)\r\n                                new Token(Token.Type.IDENTIFIER, \"name\", 0),\r\n                                new Token(Token.Type.OPERATOR, \"(\", 4),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr1\", 5),\r\n                                new Token(Token.Type.OPERATOR, \",\", 10),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr2\", 12),\r\n                                new Token(Token.Type.OPERATOR, \",\", 17),\r\n                                new Token(Token.Type.IDENTIFIER, \"expr3\", 19),\r\n                                new Token(Token.Type.OPERATOR, \")\", 24)\r\n                        ),\r\n                        new Ast.Expression.Function(\"name\", Arrays.asList(\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr1\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr2\"),\r\n                                new Ast.Expression.Access(Optional.empty(), \"expr3\")\r\n                        ))\r\n                )\r\n        );\r\n    }\r\n\r\n    /**\r\n     * Standard test function. If expected is null, a ParseException is expected\r\n     * to be thrown (not used in the provided tests).\r\n     */\r\n    private static <T extends Ast> void test(List<Token> tokens, T expected, Function<Parser, T> function) {\r\n        Parser parser = new Parser(tokens);\r\n        if (expected != null) {\r\n            Assertions.assertEquals(expected, function.apply(parser));\r\n        } else {\r\n            Assertions.assertThrows(ParseException.class, () -> function.apply(parser));\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/plc/project/ParserExpressionTests.java b/src/test/java/plc/project/ParserExpressionTests.java
+--- a/src/test/java/plc/project/ParserExpressionTests.java	(revision 1f7cc10d7b231b1f72e7bbb9179b91b3dcbf66b0)
++++ b/src/test/java/plc/project/ParserExpressionTests.java	(date 1665353037489)
+@@ -130,7 +130,18 @@
+                                 new Ast.Expression.Access(Optional.empty(), "expr1"),
+                                 new Ast.Expression.Access(Optional.empty(), "expr2")
+                         ))
+-                )
++                ),
++                Arguments.of("Missing Closing Parenthesis", //TODO how do we finish writing the test for expecting a parse exception
++                        Arrays.asList(
++                                //(expr
++                                new Token(Token.Type.OPERATOR, "(", 0),
++                                new Token(Token.Type.IDENTIFIER, "expr", 1)
++                        ),
++                        new Ast.Expression.Group(
++                                new Ast.Expression.Access(Optional.empty(), "expr")
++                                //Assertions.assertThrows(ParseException.class, () -> function.apply(parser))
++                                )
++                        )
+         );
+     }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"8f69a869-f310-4864-9489-16991fc37ceb\" name=\"Changes\" comment=\"some binary tests work, parsed add and multi expression\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/plc/project/Parser.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/plc/project/Parser.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"PLC_Project\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DukbFo6eJ3b5zI5LsrNvDadYzb\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Gradle.ParserExpressionTests\">\r\n    <configuration name=\"LexerTests\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;plc.project.LexerTests&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"LexerTests.testExamples\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;plc.project.LexerTests.testExamples&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ParserExpressionTests\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;plc.project.ParserExpressionTests&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ParserExpressionTests.testBinaryExpression\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;plc.project.ParserExpressionTests.testBinaryExpression&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ParserExpressionTests.testLiteralExpression\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;plc.project.ParserExpressionTests.testLiteralExpression&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Gradle.ParserExpressionTests\" />\r\n        <item itemvalue=\"Gradle.ParserExpressionTests.testLiteralExpression\" />\r\n        <item itemvalue=\"Gradle.ParserExpressionTests.testBinaryExpression\" />\r\n        <item itemvalue=\"Gradle.LexerTests\" />\r\n        <item itemvalue=\"Gradle.LexerTests.testExamples\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"8f69a869-f310-4864-9489-16991fc37ceb\" name=\"Changes\" comment=\"\" />\r\n      <created>1661556433976</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1661556433976</updated>\r\n      <workItem from=\"1663435050495\" duration=\"11195000\" />\r\n      <workItem from=\"1663594605402\" duration=\"374000\" />\r\n      <workItem from=\"1663595023010\" duration=\"413000\" />\r\n      <workItem from=\"1663642615664\" duration=\"391000\" />\r\n      <workItem from=\"1663776914876\" duration=\"3900000\" />\r\n      <workItem from=\"1663786529791\" duration=\"2959000\" />\r\n      <workItem from=\"1663884468233\" duration=\"2796000\" />\r\n      <workItem from=\"1663887306722\" duration=\"1202000\" />\r\n      <workItem from=\"1664074665131\" duration=\"1335000\" />\r\n      <workItem from=\"1664231433038\" duration=\"6042000\" />\r\n      <workItem from=\"1664239190041\" duration=\"36000\" />\r\n      <workItem from=\"1664906085055\" duration=\"6881000\" />\r\n      <workItem from=\"1664975729431\" duration=\"797000\" />\r\n      <workItem from=\"1664980339452\" duration=\"484000\" />\r\n      <workItem from=\"1665010003605\" duration=\"1256000\" />\r\n      <workItem from=\"1665016238984\" duration=\"2118000\" />\r\n      <workItem from=\"1665022548609\" duration=\"1089000\" />\r\n      <workItem from=\"1665083673495\" duration=\"947000\" />\r\n      <workItem from=\"1665258807349\" duration=\"4590000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added the peek/match methods\">\r\n      <created>1663436218162</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663436218162</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Added Params:5.8.2 to testImplementation dependencies\">\r\n      <created>1663516491680</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663516491680</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Added LexIdentifier()\">\r\n      <created>1663595301962</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663595301962</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"added lexString, lexEscape, lexOperator\">\r\n      <created>1663779266385</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663779266385</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"fixed lexString, lexEscape\">\r\n      <created>1663781792307</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663781792307</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"fixed leading hyphen, newline unterminated, and invalid escape. added relevant test cases\">\r\n      <created>1663888288350</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663888288350</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"possible fix to weird quotes test case\">\r\n      <created>1664075421979</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1664075421979</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"fixed weird quotes\">\r\n      <created>1664239061633</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1664239061633</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"some binary tests work, parsed add and multi expression\">\r\n      <created>1665023038369</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1665023038369</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added the peek/match methods\" />\r\n    <MESSAGE value=\"Added Params:5.8.2 to testImplementation dependencies\" />\r\n    <MESSAGE value=\"Added LexIdentifier()\" />\r\n    <MESSAGE value=\"added lexString, lexEscape, lexOperator\" />\r\n    <MESSAGE value=\"fixed lexString, lexEscape\" />\r\n    <MESSAGE value=\"fixed leading hypen, newline unterminated, and invalid escape. added relevant test cases\" />\r\n    <MESSAGE value=\"fixed leading hyphen, newline unterminated, and invalid escape. added relevant test cases\" />\r\n    <MESSAGE value=\"possible fix to weird quotes test case\" />\r\n    <MESSAGE value=\"fixed weird quotes\" />\r\n    <MESSAGE value=\"some binary tests work, parsed add and multi expression\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"some binary tests work, parsed add and multi expression\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 1f7cc10d7b231b1f72e7bbb9179b91b3dcbf66b0)
++++ b/.idea/workspace.xml	(date 1665353074209)
+@@ -4,9 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="some binary tests work, parsed add and multi expression">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="access expression">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Parser.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/plc/project/ParserExpressionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plc/project/ParserExpressionTests.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -62,7 +63,7 @@
+   }
+ }</component>
+   <component name="RunManager" selected="Gradle.ParserExpressionTests">
+-    <configuration name="LexerTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -75,7 +76,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.LexerTests&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -85,7 +86,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="LexerTests.testExamples" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -98,7 +99,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.LexerTests.testExamples&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testAccessExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -108,7 +109,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserExpressionTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -121,7 +122,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserExpressionTests&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testBinaryExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -131,7 +132,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserExpressionTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testFunctionExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -144,7 +145,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserExpressionTests.testBinaryExpression&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testFunctionExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -154,7 +155,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="ParserExpressionTests.testLiteralExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="ParserExpressionTests.testGroupExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -167,7 +168,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.ParserExpressionTests.testLiteralExpression&quot;" />
++            <option value="&quot;plc.project.ParserExpressionTests.testGroupExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -180,10 +181,10 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="Gradle.ParserExpressionTests" />
+-        <item itemvalue="Gradle.ParserExpressionTests.testLiteralExpression" />
++        <item itemvalue="Gradle.ParserExpressionTests.testFunctionExpression" />
++        <item itemvalue="Gradle.ParserExpressionTests.testAccessExpression" />
+         <item itemvalue="Gradle.ParserExpressionTests.testBinaryExpression" />
+-        <item itemvalue="Gradle.LexerTests" />
+-        <item itemvalue="Gradle.LexerTests.testExamples" />
++        <item itemvalue="Gradle.ParserExpressionTests.testGroupExpression" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -211,9 +212,8 @@
+       <workItem from="1664980339452" duration="484000" />
+       <workItem from="1665010003605" duration="1256000" />
+       <workItem from="1665016238984" duration="2118000" />
+-      <workItem from="1665022548609" duration="1089000" />
+-      <workItem from="1665083673495" duration="947000" />
+-      <workItem from="1665258807349" duration="4590000" />
++      <workItem from="1665022548609" duration="360000" />
++      <workItem from="1665349928277" duration="2681000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -271,14 +271,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1664239061633</updated>
+     </task>
+-    <task id="LOCAL-00009" summary="some binary tests work, parsed add and multi expression">
+-      <created>1665023038369</created>
++    <task id="LOCAL-00009" summary="Minor method adjustments">
++      <created>1665264255050</created>
+       <option name="number" value="00009" />
+       <option name="presentableId" value="LOCAL-00009" />
+       <option name="project" value="LOCAL" />
+-      <updated>1665023038369</updated>
++      <updated>1665264255050</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="access expression">
++      <created>1665268943831</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1665268943831</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -305,7 +312,8 @@
+     <MESSAGE value="fixed leading hyphen, newline unterminated, and invalid escape. added relevant test cases" />
+     <MESSAGE value="possible fix to weird quotes test case" />
+     <MESSAGE value="fixed weird quotes" />
+-    <MESSAGE value="some binary tests work, parsed add and multi expression" />
+-    <option name="LAST_COMMIT_MESSAGE" value="some binary tests work, parsed add and multi expression" />
++    <MESSAGE value="Minor method adjustments" />
++    <MESSAGE value="access expression" />
++    <option name="LAST_COMMIT_MESSAGE" value="access expression" />
+   </component>
+ </project>
+\ No newline at end of file

@@ -1,0 +1,305 @@
+Index: src/main/java/plc/project/Analyzer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/plc/project/Analyzer.java b/src/main/java/plc/project/Analyzer.java
+--- a/src/main/java/plc/project/Analyzer.java	
++++ b/src/main/java/plc/project/Analyzer.java	
+@@ -49,12 +49,10 @@
+         visit(ast.getExpression());
+ 
+         return null;
+-        //throw new UnsupportedOperationException();// TODO
+     }
+ 
+     @Override
+     public Void visit(Ast.Statement.Declaration ast) {
+-        //throw new UnsupportedOperationException();  // TODO
+ 
+         if(!ast.getTypeName().isPresent() && !ast.getValue().isPresent()) {
+             throw new RuntimeException("Declaration statement must have a type or value.");
+@@ -133,18 +131,34 @@
+     public Void visit(Ast.Statement.Switch ast) {
+         Ast.Expression condition = ast.getCondition();
+         List<Ast.Statement.Case> cases = ast.getCases();
++        visit(condition);
++
++        if(cases.get(cases.size() - 1).getValue().isPresent())
++            throw new RuntimeException("Default case has a value");
+ 
+         for(Ast.Statement.Case cases_ : cases) {
+-
++            scope = new Scope(scope.getParent());
++            visit(cases_);
++            if(!cases_.getValue().get().getType().equals(condition.getType()))
++                throw new RuntimeException("Value type does not match condition type");
+         }
+-
+-
+-        throw new UnsupportedOperationException();  // TODO
++        return null;
+     }
+ 
+     @Override
+     public Void visit(Ast.Statement.Case ast) {
+-        throw new UnsupportedOperationException();  // TODO
++
++        if(!ast.getValue().isPresent())
++            throw new RuntimeException("Case does not have value");
++
++        else {
++            visit(ast.getValue().get());
++
++            for(Ast.Statement stmts : ast.getStatements()) {
++                visit(stmts);
++            }
++            return null;
++        }
+     }
+ 
+     @Override
+@@ -196,7 +210,6 @@
+         ast.setType(ast.getExpression().getType());
+ 
+         return null;
+-        //throw new UnsupportedOperationException();  // TODO
+     }
+ 
+     @Override
+@@ -276,7 +289,6 @@
+ 
+         ast.setVariable(scope.lookupVariable(ast.getName()));
+         return null;
+-        //throw new UnsupportedOperationException();  // TODO
+     }
+ 
+     @Override
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="added files for p4">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Declaration Statements Finished">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" afterDir="false" />
+     </list>
+@@ -61,14 +61,14 @@
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/main/java/plc/project/Interpreter.java&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/jorda/Desktop/PLC_Project&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Gradle.AnalyzerTests">
++  <component name="RunManager" selected="Gradle.AnalyzerTests.testSwitchStatement">
+     <configuration name="AnalyzerTests" type="GradleRunConfiguration" factoryName="Gradle">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -92,7 +92,76 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="AnalyzerTests.testAssignmentStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testAssignmentStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testDeclarationStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testDeclarationStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testFunctionExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testFunctionExpression&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testIfStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -105,7 +174,30 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.InterpreterTests&quot;" />
++            <option value="&quot;plc.project.AnalyzerTests.testIfStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testSwitchStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testSwitchStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -165,11 +257,19 @@
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
+       <item itemvalue="Gradle.AnalyzerTests" />
+-      <item itemvalue="Gradle.InterpreterTests" />
++      <item itemvalue="Gradle.AnalyzerTests.testSwitchStatement" />
++      <item itemvalue="Gradle.AnalyzerTests.testAssignmentStatement" />
++      <item itemvalue="Gradle.AnalyzerTests.testDeclarationStatement" />
++      <item itemvalue="Gradle.AnalyzerTests.testFunctionExpression" />
++      <item itemvalue="Gradle.AnalyzerTests.testIfStatement" />
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Gradle.InterpreterTests" />
++        <item itemvalue="Gradle.AnalyzerTests.testSwitchStatement" />
++        <item itemvalue="Gradle.AnalyzerTests.testDeclarationStatement" />
++        <item itemvalue="Gradle.AnalyzerTests.testFunctionExpression" />
++        <item itemvalue="Gradle.AnalyzerTests.testIfStatement" />
++        <item itemvalue="Gradle.AnalyzerTests.testAssignmentStatement" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -237,6 +337,9 @@
+       <workItem from="1667754775315" duration="298000" />
+       <workItem from="1668044858262" duration="2186000" />
+       <workItem from="1668292842490" duration="5016000" />
++      <workItem from="1668436595984" duration="8943000" />
++      <workItem from="1668613147888" duration="684000" />
++      <workItem from="1668747929208" duration="3030000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -476,7 +579,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667754833708</updated>
+     </task>
+-    <option name="localTasksCounter" value="35" />
++    <task id="LOCAL-00035" summary="Started working on if and switch statements.">
++      <created>1668360911343</created>
++      <option name="number" value="00035" />
++      <option name="presentableId" value="LOCAL-00035" />
++      <option name="project" value="LOCAL" />
++      <updated>1668360911343</updated>
++    </task>
++    <task id="LOCAL-00036" summary="Wrote requireAssignable function, if statements and Function expression pass all tests.">
++      <created>1668544346444</created>
++      <option name="number" value="00036" />
++      <option name="presentableId" value="LOCAL-00036" />
++      <option name="project" value="LOCAL" />
++      <updated>1668544346444</updated>
++    </task>
++    <task id="LOCAL-00037" summary="Declaration Statements Finished">
++      <created>1668547280694</created>
++      <option name="number" value="00037" />
++      <option name="presentableId" value="LOCAL-00037" />
++      <option name="project" value="LOCAL" />
++      <updated>1668547280694</updated>
++    </task>
++    <option name="localTasksCounter" value="38" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -494,9 +618,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="finished function,expression statement,literal" />
+-    <MESSAGE value="added trailing commas test case" />
+-    <MESSAGE value="added majority of the test cases" />
+     <MESSAGE value="fixed closing parenthesis" />
+     <MESSAGE value="fixed trailing commas" />
+     <MESSAGE value="fixed missing semi" />
+@@ -519,6 +640,9 @@
+     <MESSAGE value="list access done" />
+     <MESSAGE value="interpreter final" />
+     <MESSAGE value="added files for p4" />
+-    <option name="LAST_COMMIT_MESSAGE" value="added files for p4" />
++    <MESSAGE value="Started working on if and switch statements." />
++    <MESSAGE value="Wrote requireAssignable function, if statements and Function expression pass all tests." />
++    <MESSAGE value="Declaration Statements Finished" />
++    <option name="LAST_COMMIT_MESSAGE" value="Declaration Statements Finished" />
+   </component>
+ </project>
+\ No newline at end of file

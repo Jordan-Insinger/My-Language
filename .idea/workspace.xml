@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Minor Parse Exception indexing change">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="PLC_Project" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/build.gradle.kts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/plc/project/ParseException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/plc/project/Parser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/test/java/plc/project/ParserExpressionTests.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DukbFo6eJ3b5zI5LsrNvDadYzb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Code/Programming Language Concepts/PLC_Project/src/main/java/plc/project/Generator.java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Gradle.ParserTests.testGroupExpression">
+    <configuration name="AnalyzerTests" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.AnalyzerTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GeneratorTests" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.GeneratorTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GeneratorTests.testAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.GeneratorTests.testAccessExpression&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GeneratorTests.testAssignment" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.GeneratorTests.testAssignment&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GeneratorTests.testFunction" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.GeneratorTests.testFunction&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GeneratorTests.testLiteralExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.GeneratorTests.testLiteralExpression&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="LexerTests" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.LexerTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ParserTests" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.ParserTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ParserTests.testGroupExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;plc.project.ParserTests.testGroupExpression&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.GeneratorTests" />
+      <item itemvalue="Gradle.LexerTests" />
+      <item itemvalue="Gradle.ParserTests" />
+      <item itemvalue="Gradle.AnalyzerTests" />
+      <item itemvalue="Gradle.GeneratorTests.testAccessExpression" />
+      <item itemvalue="Gradle.GeneratorTests.testAssignment" />
+      <item itemvalue="Gradle.GeneratorTests.testFunction" />
+      <item itemvalue="Gradle.GeneratorTests.testLiteralExpression" />
+      <item itemvalue="Gradle.ParserTests.testGroupExpression" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ParserTests.testGroupExpression" />
+        <item itemvalue="Gradle.GeneratorTests.testLiteralExpression" />
+        <item itemvalue="Gradle.GeneratorTests.testAccessExpression" />
+        <item itemvalue="Gradle.GeneratorTests.testAssignment" />
+        <item itemvalue="Gradle.GeneratorTests.testFunction" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="" />
+      <created>1661556433976</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661556433976</updated>
+      <workItem from="1663435050495" duration="11195000" />
+      <workItem from="1663594605402" duration="374000" />
+      <workItem from="1663595023010" duration="413000" />
+      <workItem from="1663642615664" duration="391000" />
+      <workItem from="1663776914876" duration="3900000" />
+      <workItem from="1663786529791" duration="2959000" />
+      <workItem from="1663884468233" duration="2796000" />
+      <workItem from="1663887306722" duration="1202000" />
+      <workItem from="1664074665131" duration="1335000" />
+      <workItem from="1664231433038" duration="6042000" />
+      <workItem from="1664239190041" duration="36000" />
+      <workItem from="1664906085055" duration="6881000" />
+      <workItem from="1664975729431" duration="797000" />
+      <workItem from="1664980339452" duration="484000" />
+      <workItem from="1665010003605" duration="1256000" />
+      <workItem from="1665016238984" duration="2118000" />
+      <workItem from="1665022548609" duration="1089000" />
+      <workItem from="1665083673495" duration="947000" />
+      <workItem from="1665258807349" duration="5701000" />
+      <workItem from="1665266781013" duration="1439000" />
+      <workItem from="1665279787869" duration="3016000" />
+      <workItem from="1665546700637" duration="618000" />
+      <workItem from="1665582936187" duration="300000" />
+      <workItem from="1665583535669" duration="109000" />
+      <workItem from="1665595494373" duration="14707000" />
+      <workItem from="1665689635744" duration="849000" />
+      <workItem from="1665698925093" duration="1681000" />
+      <workItem from="1665701766925" duration="1797000" />
+      <workItem from="1665748946697" duration="1140000" />
+      <workItem from="1665779546738" duration="2208000" />
+      <workItem from="1665883539952" duration="2357000" />
+      <workItem from="1665940618312" duration="1803000" />
+      <workItem from="1666008318294" duration="2477000" />
+      <workItem from="1666015021554" duration="648000" />
+      <workItem from="1666016917346" duration="661000" />
+      <workItem from="1666031347159" duration="2974000" />
+      <workItem from="1666052355033" duration="2848000" />
+      <workItem from="1666133078238" duration="6245000" />
+      <workItem from="1666744396873" duration="2411000" />
+      <workItem from="1666810456926" duration="4549000" />
+      <workItem from="1666827158147" duration="2441000" />
+      <workItem from="1666840411859" duration="52000" />
+      <workItem from="1666897335840" duration="2366000" />
+      <workItem from="1666900308660" duration="108000" />
+      <workItem from="1666906537402" duration="1194000" />
+      <workItem from="1667074512165" duration="17436000" />
+      <workItem from="1667255949494" duration="3171000" />
+      <workItem from="1667348213257" duration="4214000" />
+      <workItem from="1667415076140" duration="6158000" />
+      <workItem from="1667437023736" duration="2165000" />
+      <workItem from="1667596434734" duration="5407000" />
+      <workItem from="1667705404118" duration="363000" />
+      <workItem from="1667754475706" duration="202000" />
+      <workItem from="1667754775315" duration="298000" />
+      <workItem from="1668044858262" duration="2186000" />
+      <workItem from="1668292842490" duration="5632000" />
+      <workItem from="1668634099330" duration="8756000" />
+      <workItem from="1668882643192" duration="1796000" />
+      <workItem from="1668913646682" duration="2535000" />
+      <workItem from="1669070521619" duration="1286000" />
+      <workItem from="1669140429029" duration="1066000" />
+      <workItem from="1669157181239" duration="115000" />
+      <workItem from="1669157331161" duration="6060000" />
+      <workItem from="1669660200394" duration="430000" />
+      <workItem from="1669864934950" duration="3566000" />
+      <workItem from="1670125087922" duration="2125000" />
+      <workItem from="1670127259253" duration="827000" />
+      <workItem from="1670378027087" duration="3444000" />
+      <workItem from="1671510364407" duration="59000" />
+      <workItem from="1671748822706" duration="13000" />
+      <workItem from="1673198525432" duration="121000" />
+      <workItem from="1674506125358" duration="34000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added the peek/match methods">
+      <created>1663436218162</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663436218162</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Params:5.8.2 to testImplementation dependencies">
+      <created>1663516491680</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663516491680</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added LexIdentifier()">
+      <created>1663595301962</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663595301962</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added lexString, lexEscape, lexOperator">
+      <created>1663779266385</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663779266385</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed lexString, lexEscape">
+      <created>1663781792307</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663781792307</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed leading hyphen, newline unterminated, and invalid escape. added relevant test cases">
+      <created>1663888288350</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663888288350</updated>
+    </task>
+    <task id="LOCAL-00007" summary="possible fix to weird quotes test case">
+      <created>1664075421979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1664075421979</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixed weird quotes">
+      <created>1664239061633</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1664239061633</updated>
+    </task>
+    <task id="LOCAL-00009" summary="some binary tests work, parsed add and multi expression">
+      <created>1665023038369</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665023038369</updated>
+    </task>
+    <task id="LOCAL-00010" summary="finished function,expression statement,literal">
+      <created>1665263555838</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665263555838</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added trailing commas test case">
+      <created>1665533754717</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1665533754717</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added trailing commas test case">
+      <created>1665533789243</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1665533789243</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added majority of the test cases">
+      <created>1665534547673</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1665534547673</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fixed closing parenthesis">
+      <created>1665541497084</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1665541497084</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixed trailing commas">
+      <created>1665543373025</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1665543373025</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fixed missing semi">
+      <created>1665543558966</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1665543558966</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fixed missing value and operand">
+      <created>1665544778974</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1665544778974</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added parserTests file">
+      <created>1665583634997</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1665583634997</updated>
+    </task>
+    <task id="LOCAL-00019" summary="all statements done">
+      <created>1665620766152</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1665620766152</updated>
+    </task>
+    <task id="LOCAL-00020" summary="switch statement finished">
+      <created>1665700603058</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1665700603058</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Attempt to fix the parseExpression index for different statements">
+      <created>1665885618619</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1665885618619</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fixed switch statement and added test case accordingly">
+      <created>1666017591382</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1666017591382</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added fixes to array out of bounds exceptions">
+      <created>1666141807447</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1666141807447</updated>
+    </task>
+    <task id="LOCAL-00024" summary="access expression passing test case">
+      <created>1666814415719</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1666814415719</updated>
+    </task>
+    <task id="LOCAL-00025" summary="expression.function passed test case">
+      <created>1666829505255</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1666829505255</updated>
+    </task>
+    <task id="LOCAL-00026" summary="return and expression statement">
+      <created>1667075498180</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1667075498180</updated>
+    </task>
+    <task id="LOCAL-00027" summary="plcList">
+      <created>1667082502435</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1667082502435</updated>
+    </task>
+    <task id="LOCAL-00028" summary="expression access done">
+      <created>1667258812529</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1667258812529</updated>
+    </task>
+    <task id="LOCAL-00029" summary="source, global, function (not done)">
+      <created>1667353041099</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1667353041100</updated>
+    </task>
+    <task id="LOCAL-00030" summary="while statement">
+      <created>1667415827901</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1667415827901</updated>
+    </task>
+    <task id="LOCAL-00031" summary="switch, case, statement assignment">
+      <created>1667420402624</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1667420402624</updated>
+    </task>
+    <task id="LOCAL-00032" summary="list access done">
+      <created>1667598179817</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1667598179817</updated>
+    </task>
+    <task id="LOCAL-00033" summary="interpreter final">
+      <created>1667705602438</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1667705602438</updated>
+    </task>
+    <task id="LOCAL-00034" summary="added files for p4">
+      <created>1667754833707</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1667754833708</updated>
+    </task>
+    <task id="LOCAL-00035" summary="expression function and plcList?">
+      <created>1668301682251</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1668301682251</updated>
+    </task>
+    <task id="LOCAL-00036" summary="source, global, return, function mostly done">
+      <created>1668649111702</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1668649111702</updated>
+    </task>
+    <task id="LOCAL-00037" summary="switch and case finished">
+      <created>1668883824561</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1668883824561</updated>
+    </task>
+    <task id="LOCAL-00038" summary="switch fixed">
+      <created>1669158315031</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1669158315031</updated>
+    </task>
+    <task id="LOCAL-00039" summary="all test cases pass">
+      <created>1669179000452</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1669179000452</updated>
+    </task>
+    <task id="LOCAL-00040" summary="statement declaration and assignment">
+      <created>1669867917479</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1669867917479</updated>
+    </task>
+    <task id="LOCAL-00041" summary="switch and case done">
+      <created>1670127858650</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1670127858650</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Generator Complete">
+      <created>1671131695048</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1671131695064</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Minor Parse Exception indexing change">
+      <created>1671133871280</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1671133871280</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="all statements done" />
+    <MESSAGE value="switch statement finished" />
+    <MESSAGE value="Attempt to fix the parseExpression index for different statements" />
+    <MESSAGE value="fixed switch statement and added test case accordingly" />
+    <MESSAGE value="added fixes to array out of bounds exceptions" />
+    <MESSAGE value="access expression passing test case" />
+    <MESSAGE value="expression.function passed test case" />
+    <MESSAGE value="return and expression statement" />
+    <MESSAGE value="plcList" />
+    <MESSAGE value="expression access done" />
+    <MESSAGE value="source, global, function (not done)" />
+    <MESSAGE value="while statement" />
+    <MESSAGE value="switch, case, statement assignment" />
+    <MESSAGE value="list access done" />
+    <MESSAGE value="interpreter final" />
+    <MESSAGE value="added files for p4" />
+    <MESSAGE value="expression function and plcList?" />
+    <MESSAGE value="source, global, return, function mostly done" />
+    <MESSAGE value="switch and case finished" />
+    <MESSAGE value="switch fixed" />
+    <MESSAGE value="all test cases pass" />
+    <MESSAGE value="statement declaration and assignment" />
+    <MESSAGE value="switch and case done" />
+    <MESSAGE value="Generator Complete" />
+    <MESSAGE value="Minor Parse Exception indexing change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor Parse Exception indexing change" />
+  </component>
+</project>

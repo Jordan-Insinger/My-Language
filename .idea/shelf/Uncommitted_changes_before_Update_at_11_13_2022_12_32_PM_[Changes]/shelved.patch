@@ -1,0 +1,208 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,12 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="added files for p4">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Literal Expression">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Ast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Ast.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Environment.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Scope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Scope.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -71,7 +68,7 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Gradle.AnalyzerTests">
++  <component name="RunManager" selected="Gradle.AnalyzerTests.testIfStatement">
+     <configuration name="AnalyzerTests" type="GradleRunConfiguration" factoryName="Gradle">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -95,6 +92,98 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
++    <configuration name="AnalyzerTests.testAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testAccessExpression&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testBinaryExpression&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testIfStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testIfStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
++    <configuration name="AnalyzerTests.testLiteralExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testLiteralExpression&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
+     <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -168,10 +257,18 @@
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
+       <item itemvalue="Gradle.AnalyzerTests" />
++      <item itemvalue="Gradle.AnalyzerTests.testIfStatement" />
++      <item itemvalue="Gradle.AnalyzerTests.testLiteralExpression" />
++      <item itemvalue="Gradle.AnalyzerTests.testAccessExpression" />
++      <item itemvalue="Gradle.AnalyzerTests.testBinaryExpression" />
+       <item itemvalue="Gradle.InterpreterTests" />
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.AnalyzerTests.testIfStatement" />
++        <item itemvalue="Gradle.AnalyzerTests.testLiteralExpression" />
++        <item itemvalue="Gradle.AnalyzerTests.testBinaryExpression" />
++        <item itemvalue="Gradle.AnalyzerTests.testAccessExpression" />
+         <item itemvalue="Gradle.InterpreterTests" />
+       </list>
+     </recent_temporary>
+@@ -239,6 +336,8 @@
+       <workItem from="1667754475706" duration="202000" />
+       <workItem from="1667754775315" duration="298000" />
+       <workItem from="1668044858262" duration="2186000" />
++      <workItem from="1668191977137" duration="7664000" />
++      <workItem from="1668269814602" duration="3567000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -478,7 +577,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667754833708</updated>
+     </task>
+-    <option name="localTasksCounter" value="35" />
++    <task id="LOCAL-00035" summary="Binary Expressions + Test Cases">
++      <created>1668196810662</created>
++      <option name="number" value="00035" />
++      <option name="presentableId" value="LOCAL-00035" />
++      <option name="project" value="LOCAL" />
++      <updated>1668196810662</updated>
++    </task>
++    <task id="LOCAL-00036" summary="Binary Expressions + Test Cases">
++      <created>1668196999217</created>
++      <option name="number" value="00036" />
++      <option name="presentableId" value="LOCAL-00036" />
++      <option name="project" value="LOCAL" />
++      <updated>1668196999217</updated>
++    </task>
++    <task id="LOCAL-00037" summary="Literal Expression">
++      <created>1668206098073</created>
++      <option name="number" value="00037" />
++      <option name="presentableId" value="LOCAL-00037" />
++      <option name="project" value="LOCAL" />
++      <updated>1668206098073</updated>
++    </task>
++    <option name="localTasksCounter" value="38" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -496,8 +616,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="finished function,expression statement,literal" />
+-    <MESSAGE value="added trailing commas test case" />
+     <MESSAGE value="added majority of the test cases" />
+     <MESSAGE value="fixed closing parenthesis" />
+     <MESSAGE value="fixed trailing commas" />
+@@ -521,6 +639,8 @@
+     <MESSAGE value="list access done" />
+     <MESSAGE value="interpreter final" />
+     <MESSAGE value="added files for p4" />
+-    <option name="LAST_COMMIT_MESSAGE" value="added files for p4" />
++    <MESSAGE value="Binary Expressions + Test Cases" />
++    <MESSAGE value="Literal Expression" />
++    <option name="LAST_COMMIT_MESSAGE" value="Literal Expression" />
+   </component>
+ </project>
+\ No newline at end of file

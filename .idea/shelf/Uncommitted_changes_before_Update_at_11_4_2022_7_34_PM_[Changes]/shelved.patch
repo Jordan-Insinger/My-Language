@@ -1,0 +1,232 @@
+Index: src/main/java/plc/project/Interpreter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/plc/project/Interpreter.java b/src/main/java/plc/project/Interpreter.java
+--- a/src/main/java/plc/project/Interpreter.java	
++++ b/src/main/java/plc/project/Interpreter.java	
+@@ -411,16 +411,16 @@
+ 
+     @Override
+     public Environment.PlcObject visit(Ast.Expression.Access ast) {
+-        Environment.Variable current = scope.lookupVariable(ast.getName());
++        /*Environment.Variable current = scope.lookupVariable(ast.getName());
+         Environment.PlcObject result;
+         if (ast.getOffset().isPresent()) { // list has an offset present
+-            Object offset = ast.getOffset();
+-            if(offset.getClass().equals(BigInteger.class)) {
++            Optional<Ast.Expression> offset = ast.getOffset();
++            //if(requireType(BigInteger.class, offset.get().getClass())) {
+                 Object currentValue = current.getValue().getValue();
+                 result = Environment.create(((List<Environment.PlcObject>) currentValue).get(Integer.parseInt(offset.toString())));
+                 return result;
+-            }
+-            else {
++            //}
++           /* else {
+                 //wtf do i do here :<
+                 throw new RuntimeException("Not in BigInteger");
+ 
+@@ -429,6 +429,18 @@
+         else { //regular variable
+             result = Environment.create(current.getValue().getValue());
+             return result;
++        }*/
++        if(!(ast instanceof Ast.Expression.Access)) throw new RuntimeException("Receiver is not an access expression");
++        else {
++            String name = ast.getName();
++
++            if(ast.getOffset().isPresent()) {   // List access
++                Optional<Ast.Expression> offset = ast.getOffset();
++                return Environment.create(((List<Object>) scope.lookupVariable(name).getValue().getValue()).get((Integer)(visit(offset.get()))));
++            }
++            else {  // variable access
++                return scope.lookupVariable(name).getValue();
++            }
+         }
+     }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="while statement">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Fixed declaration statements, passes all test cases">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Interpreter.java" afterDir="false" />
+     </list>
+@@ -68,7 +68,7 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Gradle.InterpreterTests">
++  <component name="RunManager" selected="Gradle.InterpreterTests.testListAccessExpression">
+     <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -92,7 +92,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="InterpreterTests.testAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -105,7 +105,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.InterpreterTests.testAccessExpression&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testBinaryExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -115,7 +115,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="InterpreterTests.testBinaryExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testDeclarationStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -128,7 +128,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.InterpreterTests.testBinaryExpression&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testDeclarationStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -138,7 +138,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="InterpreterTests.testListAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testIfStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -151,7 +151,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.InterpreterTests.testListAccessExpression&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testIfStatement&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -161,7 +161,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="InterpreterTests.testListAssignmentStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="InterpreterTests.testListAccessExpression" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+@@ -174,7 +174,7 @@
+           <list>
+             <option value=":test" />
+             <option value="--tests" />
+-            <option value="&quot;plc.project.InterpreterTests.testListAssignmentStatement&quot;" />
++            <option value="&quot;plc.project.InterpreterTests.testListAccessExpression&quot;" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -233,18 +233,18 @@
+     <list>
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
+-      <item itemvalue="Gradle.InterpreterTests.testListAssignmentStatement" />
+-      <item itemvalue="Gradle.InterpreterTests.testAccessExpression" />
+       <item itemvalue="Gradle.InterpreterTests.testListAccessExpression" />
++      <item itemvalue="Gradle.InterpreterTests.testDeclarationStatement" />
++      <item itemvalue="Gradle.InterpreterTests.testIfStatement" />
+       <item itemvalue="Gradle.InterpreterTests.testBinaryExpression" />
+       <item itemvalue="Gradle.InterpreterTests" />
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Gradle.InterpreterTests" />
+         <item itemvalue="Gradle.InterpreterTests.testListAccessExpression" />
+-        <item itemvalue="Gradle.InterpreterTests.testListAssignmentStatement" />
+-        <item itemvalue="Gradle.InterpreterTests.testAccessExpression" />
++        <item itemvalue="Gradle.InterpreterTests" />
++        <item itemvalue="Gradle.InterpreterTests.testDeclarationStatement" />
++        <item itemvalue="Gradle.InterpreterTests.testIfStatement" />
+         <item itemvalue="Gradle.InterpreterTests.testBinaryExpression" />
+       </list>
+     </recent_temporary>
+@@ -306,6 +306,8 @@
+       <workItem from="1667255949494" duration="3171000" />
+       <workItem from="1667348213257" duration="4214000" />
+       <workItem from="1667415076140" duration="5088000" />
++      <workItem from="1667505989623" duration="4006000" />
++      <workItem from="1667570433288" duration="5369000" />
+     </task>
+     <task id="LOCAL-00001" summary="Added the peek/match methods">
+       <created>1663436218162</created>
+@@ -517,7 +519,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667415827901</updated>
+     </task>
+-    <option name="localTasksCounter" value="31" />
++    <task id="LOCAL-00031" summary="Implemented * and - for binary + test cases.">
++      <created>1667426977458</created>
++      <option name="number" value="00031" />
++      <option name="presentableId" value="LOCAL-00031" />
++      <option name="project" value="LOCAL" />
++      <updated>1667426977458</updated>
++    </task>
++    <task id="LOCAL-00032" summary="Working if statements">
++      <created>1667429889474</created>
++      <option name="number" value="00032" />
++      <option name="presentableId" value="LOCAL-00032" />
++      <option name="project" value="LOCAL" />
++      <updated>1667429889474</updated>
++    </task>
++    <task id="LOCAL-00033" summary="Fixed declaration statements, passes all test cases">
++      <created>1667530104027</created>
++      <option name="number" value="00033" />
++      <option name="presentableId" value="LOCAL-00033" />
++      <option name="project" value="LOCAL" />
++      <updated>1667530104027</updated>
++    </task>
++    <option name="localTasksCounter" value="34" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -535,9 +558,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="fixed leading hyphen, newline unterminated, and invalid escape. added relevant test cases" />
+-    <MESSAGE value="possible fix to weird quotes test case" />
+-    <MESSAGE value="fixed weird quotes" />
+     <MESSAGE value="some binary tests work, parsed add and multi expression" />
+     <MESSAGE value="finished function,expression statement,literal" />
+     <MESSAGE value="added trailing commas test case" />
+@@ -560,6 +580,9 @@
+     <MESSAGE value="expression access done" />
+     <MESSAGE value="source, global, function (not done)" />
+     <MESSAGE value="while statement" />
+-    <option name="LAST_COMMIT_MESSAGE" value="while statement" />
++    <MESSAGE value="Implemented * and - for binary + test cases." />
++    <MESSAGE value="Working if statements" />
++    <MESSAGE value="Fixed declaration statements, passes all test cases" />
++    <option name="LAST_COMMIT_MESSAGE" value="Fixed declaration statements, passes all test cases" />
+   </component>
+ </project>
+\ No newline at end of file

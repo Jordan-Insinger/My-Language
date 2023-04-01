@@ -1,0 +1,96 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="switch and case finished">
++    <list default="true" id="8f69a869-f310-4864-9489-16991fc37ceb" name="Changes" comment="Fixed bugs in switch, assignable, and literal.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plc/project/Analyzer.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -92,6 +91,29 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
++    <configuration name="AnalyzerTests.testSwitchStatement" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list>
++            <option value=":test" />
++            <option value="--tests" />
++            <option value="&quot;plc.project.AnalyzerTests.testSwitchStatement&quot;" />
++          </list>
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
+     <configuration name="InterpreterTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -165,10 +187,12 @@
+       <item itemvalue="Gradle.LexerTests" />
+       <item itemvalue="Gradle.ParserTests" />
+       <item itemvalue="Gradle.AnalyzerTests" />
++      <item itemvalue="Gradle.AnalyzerTests.testSwitchStatement" />
+       <item itemvalue="Gradle.InterpreterTests" />
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.AnalyzerTests.testSwitchStatement" />
+         <item itemvalue="Gradle.InterpreterTests" />
+       </list>
+     </recent_temporary>
+@@ -500,7 +524,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668883824561</updated>
+     </task>
+-    <option name="localTasksCounter" value="38" />
++    <task id="LOCAL-00038" summary="Fixed bugs in switch, assignable, and literal.">
++      <created>1669156751267</created>
++      <option name="number" value="00038" />
++      <option name="presentableId" value="LOCAL-00038" />
++      <option name="project" value="LOCAL" />
++      <updated>1669156751267</updated>
++    </task>
++    <option name="localTasksCounter" value="39" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -518,7 +549,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="fixed closing parenthesis" />
+     <MESSAGE value="fixed trailing commas" />
+     <MESSAGE value="fixed missing semi" />
+     <MESSAGE value="fixed missing value and operand" />
+@@ -543,6 +573,7 @@
+     <MESSAGE value="expression function and plcList?" />
+     <MESSAGE value="source, global, return, function mostly done" />
+     <MESSAGE value="switch and case finished" />
+-    <option name="LAST_COMMIT_MESSAGE" value="switch and case finished" />
++    <MESSAGE value="Fixed bugs in switch, assignable, and literal." />
++    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs in switch, assignable, and literal." />
+   </component>
+ </project>
+\ No newline at end of file
